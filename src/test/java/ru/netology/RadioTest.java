@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioTest {
     Radio radio = new Radio();
 
-    //тесты для радиостанции
+//тесты для радиостанции
     @Test
     public void shouldNotSetCurrentRadioStationBelowMin() {   //"не должен устанавливать текущую радиостанцию ниже мин"
         radio.setCurrentRadioStation(4);   //вызови метод "установи текущую радиостанцию", передай ей число в круглых скобках
@@ -72,7 +72,39 @@ class RadioTest {
         assertEquals(9, radio.getCurrentRadioStation());
     }
 
-    //тесты для громкости
+    @Test
+    public void shouldSetFromMinToNextRadioStation() {   //"установи с min на следующую радиостанцию"
+        radio.setCurrentRadioStation(0);
+        radio.setNextStation();
+
+        assertEquals(1, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldSetFromPreviousToMaxRadioStation() {   //"установи с предыдущей на max радиостанцию"
+        radio.setCurrentRadioStation(8);
+        radio.setNextStation();
+
+        assertEquals(9, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldFromNextToMinRadioStation() {   //"установи с последующей на min радиостанцию"
+        radio.setCurrentRadioStation(1);
+        radio.setPreviousStation();
+
+        assertEquals(0, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldFromMaxToPreviousRadioStation() {   //"установи с max на предыдущую радиостанцию"
+        radio.setCurrentRadioStation(9);
+        radio.setPreviousStation();
+
+        assertEquals(8, radio.getCurrentRadioStation());
+    }
+
+//тесты для громкости
     @Test
     public void shouldNotSetCurrentVolumeBelowMin() {   //"не должен устанавливать текущую громкость ниже мин"
         radio.setCurrentVolume(5);
@@ -134,6 +166,38 @@ class RadioTest {
     public void shouldNotToBeBelowMinVolume() {   //"не д.б. ниже мin громкости"
         radio.setCurrentVolume(0);
         radio.decreaseVolume();
+        radio.decreaseVolume();
+
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldIncreaseFromMinToNextVolume() {   //"увеличь громкость с min на следующую на 1"
+        radio.setCurrentVolume(0);
+        radio.increaseVolume();
+
+        assertEquals(1, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldIncreaseFromPreviousToMaxVolume() {   //"увеличь громкость с предыдущей на max"
+        radio.setCurrentVolume(0);
+        radio.increaseVolume();
+
+        assertEquals(1, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldDecreaseFromNextToMinVolume() {   //"уменьши громкость с последующей на min"
+        radio.setCurrentVolume(1);
+        radio.decreaseVolume();
+
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldDecreaseFromMaxToPreviousVolume() {   //"уменьши громкость с max на предыдущую"
+        radio.setCurrentVolume(1);
         radio.decreaseVolume();
 
         assertEquals(0, radio.getCurrentVolume());
