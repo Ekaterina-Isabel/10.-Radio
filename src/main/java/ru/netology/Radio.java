@@ -28,8 +28,7 @@ public class Radio {   //класс ru.netology.Radio, с большой бук�
     public void setNextStation() {   //"установи следующую радиостанцию"
         if (currentRadioStation < maxRadioStation) {
             currentRadioStation = currentRadioStation + 1;
-        }
-        if (currentRadioStation == maxRadioStation) {
+        } else {
             currentRadioStation = minRadioStation;
         }
     }
@@ -37,8 +36,7 @@ public class Radio {   //класс ru.netology.Radio, с большой бук�
     public void setPreviousStation() {   //"установи предыдущую радиостанцию"
         if (currentRadioStation > minRadioStation) {
             currentRadioStation = currentRadioStation - 1;
-        }
-        if (currentRadioStation == minRadioStation) {
+        } else {
             currentRadioStation = maxRadioStation;
         }
     }
