@@ -181,10 +181,10 @@ class RadioTest {
 
     @Test
     public void shouldIncreaseFromPreviousToMaxVolume() {   //"увеличь громкость с предыдущей на max"
-        radio.setCurrentVolume(0);
+        radio.setCurrentVolume(9);
         radio.increaseVolume();
 
-        assertEquals(1, radio.getCurrentVolume());
+        assertEquals(10, radio.getCurrentVolume());
     }
 
     @Test
@@ -197,9 +197,9 @@ class RadioTest {
 
     @Test
     public void shouldDecreaseFromMaxToPreviousVolume() {   //"уменьши громкость с max на предыдущую"
-        radio.setCurrentVolume(1);
+        radio.setCurrentVolume(10);
         radio.decreaseVolume();
 
-        assertEquals(0, radio.getCurrentVolume());
+        assertEquals(9, radio.getCurrentVolume());
     }
 }
