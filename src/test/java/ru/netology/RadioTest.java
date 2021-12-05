@@ -124,15 +124,15 @@ class RadioTest {
     @Test
     public void shouldSetMaxVolume() {   //"установи мax громкость"
         radio.setCurrentVolume(5);
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
 
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldNotSetCurrentVolumeHigherMax() {   //"не должен устанавливать текущую громкость выше мах"
         radio.setCurrentVolume(5);
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(110);
 
         assertEquals(5, radio.getCurrentVolume());
     }
@@ -155,11 +155,11 @@ class RadioTest {
 
     @Test
     public void shouldNotToBeHigherMaxVolume() {   //"не должен быть выше мах громкости"
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
         radio.increaseVolume();
 
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
@@ -181,10 +181,10 @@ class RadioTest {
 
     @Test
     public void shouldIncreaseFromPreviousToMaxVolume() {   //"увеличь громкость с предыдущей на max"
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(99);
         radio.increaseVolume();
 
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
@@ -197,9 +197,77 @@ class RadioTest {
 
     @Test
     public void shouldDecreaseFromMaxToPreviousVolume() {   //"уменьши громкость с max на предыдущую"
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.decreaseVolume();
 
-        assertEquals(9, radio.getCurrentVolume());
+        assertEquals(99, radio.getCurrentVolume());
+    }
+
+    // тесты под новые условия (конструктор): любое кол-во радиостанций, max грокость = 100
+    @Test
+    public void shouldCheckSettingRadioStationNumbers() {   //"должен проверить установку количества радиостанций"
+        Radio radio = new Radio(100);
+
+        assertEquals(100, radio.getRadioStationNumbers());
+    }
+
+    @Test
+    public void shouldNotSetRadioStationNumbersBelow0() {   //"не должен устанавливать количество радиостанций ниже 0"
+        Radio radio = new Radio(-1);
+
+        assertEquals(1, radio.getRadioStationNumbers());
+    }
+
+    @Test
+    public void shouldNotSetRadioStationNumbers0() {   //"не должен устанавливать количество радиостанций 0"
+        Radio radio = new Radio(0);
+
+        assertEquals(1, radio.getRadioStationNumbers());
+    }
+
+    @Test
+    public void shouldSetRadioStationNumbers1() {   //"должен установить 1 радиостанцию"
+        Radio radio = new Radio(1);
+
+        assertEquals(1, radio.getRadioStationNumbers());
+    }
+
+    @Test
+    public void shouldSetDefaultRadioStationNumbers() {   //"должен создать объект радио с количеством радиостанций по дефолту"
+        Radio radio = new Radio();
+
+        assertEquals(10, radio.getRadioStationNumbers());
+    }
+
+
+    // проверить старые тесты для Радио по новому конструктору
+    @Test
+    public void shouldSetMinRadioStationWhenIncreaseMaxConstructor() {   //"установи min радиостанцию при увеличении max"
+        Radio radio = new Radio(100);
+
+        radio.setCurrentRadioStation(99);
+        radio.setNextStation();
+
+        assertEquals(0, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldNotSetCurrentRadioStationHigherMaxNewConstructor() {   //"не должен устанавливать текущую радиостанцию выше мах"
+        Radio radio = new Radio(100);
+
+        radio.setCurrentRadioStation(4);
+        radio.setCurrentRadioStation(1010);
+
+        assertEquals(4, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldSetMaxRadioStationWhenDecreaseMinConstructor() {   //"установи maх радиостанцию при уменьшении mix"
+        Radio radio = new Radio(100);
+
+        radio.setCurrentRadioStation(0);
+        radio.setPreviousStation();
+
+        assertEquals(99, radio.getCurrentRadioStation());
     }
 }
