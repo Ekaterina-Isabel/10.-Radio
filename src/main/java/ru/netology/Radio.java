@@ -7,7 +7,22 @@ public class Radio {   //класс ru.netology.Radio, с большой бук�
 
     private int currentVolume;   //поле "текущая громкость"
     private int minVolume = 0;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
+
+    //конструкторы
+    public Radio() {}
+
+    public Radio(int radioStationNumbers) {
+        if (radioStationNumbers < 1) {
+            maxRadioStation = 0;
+        } else {
+            maxRadioStation = radioStationNumbers -1;
+        }
+    }
+
+    public int getRadioStationNumbers() {
+        return maxRadioStation + 1;
+    }
 
     //радиостанции
     public void setCurrentRadioStation(int currentRadioStation) {   //"установи текущую радиостанцию", set - что-то меняет, но ничего обратно не ждем
