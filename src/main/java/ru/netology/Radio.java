@@ -1,5 +1,13 @@
 package ru.netology;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {   //класс ru.netology.Radio, с большой буквы
     private int currentRadioStation;   //поле "текущая радиостанция"
     private int minRadioStation = 0;
@@ -10,8 +18,6 @@ public class Radio {   //класс ru.netology.Radio, с большой бук�
     private int maxVolume = 100;
 
     //конструкторы
-    public Radio() {}
-
     public Radio(int radioStationNumbers) {
         if (radioStationNumbers < 1) {
             maxRadioStation = 0;
@@ -34,10 +40,6 @@ public class Radio {   //класс ru.netology.Radio, с большой бук�
             return;
         }
         this.currentRadioStation = currentRadioStation;
-    }
-
-    public int getCurrentRadioStation() {   //"покажи текущую радиостанцию", get - ждем ответ от радио
-        return currentRadioStation;
     }
 
     public void setNextStation() {   //"установи следующую радиостанцию"
@@ -65,10 +67,6 @@ public class Radio {   //класс ru.netology.Radio, с большой бук�
             return;
         }
         this.currentVolume = currentVolume;
-    }
-
-    public int getCurrentVolume() {   //"покажи текущую громкость"
-        return currentVolume;
     }
 
     public void decreaseVolume() {   //"уменьши громкость"
